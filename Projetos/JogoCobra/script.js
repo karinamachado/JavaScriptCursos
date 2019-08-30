@@ -1,9 +1,9 @@
 
-let canvas = document.getElementById('snake');
+let canvas = document.getElementById('snake'); // create element that will play the game
 // context renders
 let context = canvas.getContext('2d');
 const box = 32;
-let snake = [];
+let snake = []; //create snake like a list.
 snake[0] = {
     x: 8 * box,
     y: 8 * box
@@ -23,12 +23,12 @@ function criarBg() {
        // create style context
     context.fillStyle = 'lightgreen';
       //desenha o retangulo 2d, trabalha com 4 parametros: x, y w, h, onde acontece o jogo
-    context.fillRect(0, 0, 16 * box, 16 * box);
+    context.fillRect(0, 0, 16*box, 16*box);
 }
 
 function criarCobrinha(){
 
-    for(i=0; i < snake.length; i++){
+    for(i = 0; i < snake.length; i++){
         context.fillStyle = "green";
         context.fillRect(snake[i].x, snake[i].y, box, box);
 
@@ -40,6 +40,8 @@ function drawfood(){
     context.fillRect(food.x, food.y, box, box);
 
 }
+
+//Quando um evento acontece, detecta e chama a função.
 
 document.addEventListener('keydown', update);
 
@@ -57,6 +59,15 @@ function iniciarJogo(){
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
     if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box;
 
+    //se a cabeca, juntar com o corpo, o jogo exibe um alerta para finalizar o jogo.
+
+    for(i = 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            alert('Game Over :(');
+        }
+    }
+
     criarBg();
     criarCobrinha();
     drawfood();
@@ -71,13 +82,22 @@ function iniciarJogo(){
     if( direction == "up"   )  snakeY -= box;
     if( direction == "down" )  snakeY += box;
 
-    snake.pop();
+    if(snakeX != food.x || snakeY != food.y){
+        snake.pop(); // tira o ultimo elemento da lista.
+    }
+    else{
+
+        food.x = Math.floor(Math.random() * 15 + 1)  * box;
+        food.y = Math.floor(Math.random() * 15 + 1 ) * box;
+
+    }
+
 
     let newHead = {
-        x:snakeX,
-        y:snakeY
+        x: snakeX,
+        y: snakeY
     }
-    snake.unshift(newHead);
+    snake.unshift(newHead); //metodo unshift adiciona como primeiro quadrado da cobrinha.
 }
 
 // Passing the 100 millisecond interval to start. That way the game won't crash.

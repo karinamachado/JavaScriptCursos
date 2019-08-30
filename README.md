@@ -1,4 +1,4 @@
-# JavaScriptCursos
+# JavaScriptCourse - Exercise ( Snake Game)
 
 Snake Game , using HTML5, CSS and JavaScript.
 

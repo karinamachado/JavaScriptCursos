@@ -1,3 +1,4 @@
+
 # JavaScriptCourse - Exercise ( Snake Game)
 
 Snake Game , using HTML5, CSS and JavaScript.
@@ -10,6 +11,12 @@ Play The Game:
 
 3) This is a exercise to practice de javascript code, so I use: function, arrays, conditional structure.
 
+<html>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5UrgGBl3NjI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+</html>
+
 
 

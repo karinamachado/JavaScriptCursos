@@ -1,6 +1,6 @@
 
 let canvas = document.getElementById('snake');
-// context renderiza
+// context renders
 let context = canvas.getContext('2d');
 const box = 32;
 let snake = [];
@@ -10,11 +10,17 @@ snake[0] = {
 }
 
 let direction = "right";
+let food = {
+    // Math.floor => returns the smallest integer from the number.
+    // Math.random => returns random number up to 1.
+    x: Math.floor(Math.random() * 15 + 1)  * box,
+    y: Math.floor(Math.random() * 15 + 1 ) * box
+}
 
-//funcao cria o canva
+//function create canva 
 
 function criarBg() {
-       // cria o estilo do contexto
+       // create style context
     context.fillStyle = 'lightgreen';
       //desenha o retangulo 2d, trabalha com 4 parametros: x, y w, h, onde acontece o jogo
     context.fillRect(0, 0, 16 * box, 16 * box);
@@ -29,6 +35,12 @@ function criarCobrinha(){
     }
 }
 
+function drawfood(){
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);
+
+}
+
 document.addEventListener('keydown', update);
 
 function update(event){
@@ -39,7 +51,7 @@ function update(event){
 }
 
 function iniciarJogo(){
-    //se o valor de snake for maior que 15 e a direcao é pela direita, ela inicia na posicao 0 de X.
+    //if the snake value is greater than 15 and the direction is on the right, it starts at position 0 of X.
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
@@ -47,11 +59,12 @@ function iniciarJogo(){
 
     criarBg();
     criarCobrinha();
+    drawfood();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    //criar coordenadas da cobrinha
+    // create snake coordinates
 
     if( direction == "right")  snakeX += box;
     if( direction == "left" )  snakeX -= box;
@@ -67,7 +80,7 @@ function iniciarJogo(){
     snake.unshift(newHead);
 }
 
-// Passando o intervalo de 100 milisegundos para iniciar. Assim o jogo nao vai travar.
+// Passing the 100 millisecond interval to start. That way the game won't crash.
 
 let jogo = setInterval(iniciarJogo, 100);
 
